@@ -1,3 +1,16 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 console.log("hola");
 // ---------- Tipado ----------
 var myString = "pepe"; // en js
@@ -38,3 +51,37 @@ var GetFullName = function (firstName, lastName) {
 document.getElementById("sumador").innerText = Sumador(2, 4).toString();
 // document.getElementById("fullName").innerText = GetFullName("Federico", "Morales");
 document.getElementById("fullName").innerText = GetFullName("Federico"); // apellido es opcional
+// Creo una función que recibe un objeto de Persona? o de IPersona? falta definir la clase..
+function MostrarPersona(pers) {
+    document.getElementById("persona").innerText = "Nombre: " + pers.nombre + " - Edad: " + pers.edad.toString();
+}
+// Creo variable del tipo Persona
+var personaObj = { edad: 23, nombre: "Abelardo" };
+// Ejecuto el método pasando el objeto creado como parámetro.
+MostrarPersona(personaObj);
+// ---------- Clases ----------
+// Utilizo la interface ya creada IPersona y declaro una nueva clase
+var Alumno = /** @class */ (function () {
+    function Alumno(legajo, nombre, apellido, edad) {
+        this.legajo = legajo;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.edad = edad;
+    }
+    Alumno.prototype.NombreCompleto = function () {
+        return this.nombre + " " + this.apellido;
+    };
+    return Alumno;
+}());
+var AlumnoUtn = /** @class */ (function (_super) {
+    __extends(AlumnoUtn, _super);
+    function AlumnoUtn(carrera, legajo, nombre, apellido, edad) {
+        var _this = _super.call(this, legajo, nombre, apellido, edad) || this;
+        _this.carrera = carrera; // Va después del super.
+        return _this;
+    }
+    return AlumnoUtn;
+}(Alumno));
+// Creo un objeto
+var alumnoUtnObj = new AlumnoUtn("Sistemas", 25234, "Juan Sebastián", "Bach", 52);
+document.getElementById("alumno").innerText = alumnoUtnObj.NombreCompleto();

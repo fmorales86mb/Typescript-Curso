@@ -57,3 +57,57 @@ document.getElementById("sumador").innerText = Sumador(2,4).toString();
 // document.getElementById("fullName").innerText = GetFullName("Federico", "Morales");
 document.getElementById("fullName").innerText = GetFullName("Federico"); // apellido es opcional
 
+// ---------- Interfaces ----------
+
+// creo la interface de la clase.
+interface IPersona {
+    edad : number;
+    nombre : string;
+    apellido?: string;
+}
+
+// Creo una función que recibe un objeto de Persona? o de IPersona? falta definir la clase..
+function MostrarPersona (pers: IPersona) : void {
+    document.getElementById("persona").innerText = `Nombre: ${pers.nombre} - Edad: ${pers.edad.toString()}`;
+}
+
+// Creo variable del tipo Persona
+var personaObj : IPersona = {edad: 23, nombre: "Abelardo"};
+
+// Ejecuto el método pasando el objeto creado como parámetro.
+MostrarPersona(personaObj);
+
+// ---------- Clases ----------
+
+// Utilizo la interface ya creada IPersona y declaro una nueva clase
+class Alumno implements IPersona{    
+    protected legajo : number;
+    apellido;
+    edad; // ver modificadores de acceso.
+    nombre;
+
+    public NombreCompleto() : string {
+        return `${this.nombre} ${this.apellido}`;        
+    }
+
+    constructor (legajo: number, nombre: string, apellido: string, edad: number){        
+        this.legajo = legajo;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.edad = edad;
+    }
+}
+
+class AlumnoUtn extends Alumno{
+    public carrera: string;
+
+    constructor (carrera: string, legajo: number, nombre: string, apellido: string, edad: number){     
+        super(legajo, nombre, apellido, edad); // Invoca al constructor de la clase padre.
+        this.carrera = carrera; // Va después del super.
+    }
+}
+
+// Creo un objeto
+var alumnoUtnObj = new AlumnoUtn("Sistemas", 25234, "Juan Sebastián", "Bach", 52);
+
+document.getElementById("alumno").innerText = alumnoUtnObj.NombreCompleto();
