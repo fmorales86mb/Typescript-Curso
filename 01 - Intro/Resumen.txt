@@ -1,0 +1,11 @@
+Typescript es un lenguaje orientado a objetos con base de js
+Es compilado, al compilarlo crea un archivo js que es el que se ejecuta y el que pueden leer los navegadores.
+
+Para descargar ts: 
+    node i tsc -g
+
+para compilar un archivo ts: 
+    tsc archivo.ts
+
+para compilación automática: 
+    tsc archiv.ts -w
