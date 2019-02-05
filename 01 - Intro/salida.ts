@@ -111,3 +111,50 @@ class AlumnoUtn extends Alumno{
 var alumnoUtnObj = new AlumnoUtn("Sistemas", 25234, "Juan Sebastián", "Bach", 52);
 
 document.getElementById("alumno").innerText = alumnoUtnObj.NombreCompleto();
+
+// ---------- Uso de Let ----------
+
+var list = document.getElementById("list");
+
+for (var i = 1; i <= 5; i++) {
+  var item = document.createElement("LI");
+  item.appendChild(document.createTextNode("Item " + i));
+
+//  las cinco instancias de la función (anónima) interna hacen referencia a cinco diferentes instancias de la variable j
+  
+let j = i;
+  // funcón anónima.
+  item.onclick = function (ev) {
+    console.log("Item " + j + " is clicked.");
+  };
+  list.appendChild(item);
+}
+/* 
+    esto no funcionaría como se espera si reemplazamos let con var 
+    o si removemos la variable j y simplemente usamos la variable i dentro de la función interna.
+
+    Variables declaradas por let tienen por alcance el bloque en el que se han definido, así mismo, 
+    como en cualquier bloque interno. De esta manera, let trabaja muy parecido a var. 
+    La más notable diferencia es que el alcance de una variable var es la función contenedora:
+*/
+
+function varTest() {
+    var x = 31;
+    if (true) {
+      var x = 71;  // ¡misma variable!
+      console.log(x);  // 71
+    }
+    console.log(x);  // 71
+  }
+  
+  function letTest() {
+    let x = 31;
+    if (true) {
+      let x = 71;  // variable diferente
+      console.log(x);  // 71
+    }
+    console.log(x);  // 31
+  }
+  // llamamos a las funciones
+  varTest();
+  letTest();
